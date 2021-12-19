@@ -43,4 +43,3 @@ To open it in a browser go to this URL;
 http://127.0.0.1:8000/user/index
 ```
 
-Documentation link: <a href="https://github.com/madhavparikh99/MIT-TriSem2/tree/main/Documentation">Documentation Link</a>
