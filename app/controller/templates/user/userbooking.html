@@ -1,0 +1,309 @@
+{% extends 'adminDashboard.html' %}
+
+{% block content %}
+
+            <div class="container-fluid">
+
+              <!-----------------Button coding ----------------->
+
+ <div class="row">
+                    <div class="col-12">
+                     
+                        <div class="card">
+                            <div class="card-body">
+                              <form method="POST" action="{{url_for('user.userbookinginfo')}}">
+
+                        <button type="submit" class="btn btn-warning" name="button1" value=1 style="color:white; font-weight: bold;"> Pending </button>
+
+
+                       <button type="submit" class="btn btn-success" name="button2" value=2 style="color:white; font-weight: bold;"> Approved</button>
+
+
+                       <button type="submit" class="btn btn-danger" name="button3" value=3 style="color:white; font-weight: bold;"> Declined</button>
+
+                       </form>
+                       </div>
+                       </div>
+                       </div>
+                       </div>    
+
+                       
+
+
+
+
+              <!---------------------button coding end -------------->
+
+{% if value == "1" %}
+          <div class="row">
+                    <div class="col-12">
+                     
+                        <div class="card">
+                            <div class="card-body">
+                            	<form>
+              
+                <table class="table table-hover">
+                	 <thead>
+       {%for x in data %}
+    <tr style="font-weight:bold; background-color: #E8E8E8;">
+      <td scope="col" colspan=6 style="color:black; margin-left: 15px; font-size: 22px;">{{ x['pg_name']}} </td>
+      <td style="color:black; font-size: 22px;">{{ x['pg_gender']}} Pg
+      </td>
+      
+    </tr>
+  </thead>
+  <thead>
+    <tr style="font-weight:bold; background-color: #181818;">
+      <td scope="col" style="color:white;">Owner name</td>
+      <td scope="col"style="color:white;">Phone no</td>
+      <td scope="col"style="color:white;">Date</td>
+      <td scope="col"style="color:white;">Area</td>
+      <td scope="col"style="color:white;">City</td>
+      <td scope="col"style="color:white;">Amount</td>
+      <td scope="col"style="color:white;">Status</td>
+
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+    <tr>
+      <td scope="row" style="color:black;">{{ x['fname']}} {{x['lname']}}</td>
+    
+    <td scope="row" style="color:black;">{{ x['phone']}}</td>
+    
+      <td scope="row" style="color:black;">{{ x['book_date']}}</td>
+    
+      <td scope="row" style="color:black;">{{ x['area']}}</td>
+   
+      <td scope="row" style="color:black;">{{ x['city']}}</td>
+
+       <td scope="row" style="color:black;">{{ x['amount']}}</td>
+    
+
+    <td scope="row"><button type="button" class="btn btn-warning" name="button2" style="color:white; font-weight: bold;"><i class="far fa-eye"> Pending</i></button></td>
+      
+    </tr>
+  
+  </tbody>
+  {% endfor %}
+  
+</table>  
+</form>       
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if value == "2" %}
+             <div class="row">
+                    <div class="col-12">
+                     
+                        <div class="card">
+                            <div class="card-body">
+                              <form>
+              
+                <table class="table table-hover">
+                   <thead>
+       {%for x in data %}
+    <tr style="font-weight:bold; background-color: #E8E8E8;">
+      <td scope="col" colspan=6 style="color:black; margin-left: 15px; font-size: 22px;">{{ x['pg_name']}} </td>
+      <td style="color:black; font-size: 22px;">{{ x['pg_gender']}} Pg
+      </td>
+      
+    </tr>
+  </thead>
+  <thead>
+    <tr style="font-weight:bold; background-color: #181818;">
+      <td scope="col" style="color:white;">Owner name</td>
+      <td scope="col"style="color:white;">Phone no</td>
+      <td scope="col"style="color:white;">Date</td>
+      <td scope="col"style="color:white;">Area</td>
+      <td scope="col"style="color:white;">City</td>
+      <td scope="col"style="color:white;">Amount</td>
+      <td scope="col"style="color:white;">Status</td>
+
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+    <tr>
+      <td scope="row" style="color:black;">{{ x['fname']}} {{x['lname']}}</td>
+    
+    <td scope="row" style="color:black;">{{ x['phone']}}</td>
+    
+      <td scope="row" style="color:black;">{{ x['book_date']}}</td>
+    
+      <td scope="row" style="color:black;">{{ x['area']}}</td>
+   
+      <td scope="row" style="color:black;">{{ x['city']}}</td>
+
+       <td scope="row" style="color:black;">{{ x['amount']}}</td>
+    
+
+    <td scope="row"><button type="button" class="btn btn-success" style="color:white; font-weight: bold;" data-toggle="modal" data-target="#payment{{x['pgid']}}"><i class="fa fa-wallet">Confirm </i></button></td>
+      
+    </tr>
+    
+  </tbody>
+  {% endfor %}
+  
+</table>  
+</form> 
+<!-- Modal -->
+                                    {% for x in data %}
+
+                                    <div class="modal fade" id="payment{{x['pgid']}}" tabindex="-1" role="dialog" aria-labelledby="addroom" aria-hidden="true">
+                                      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                           <form method="POST"action="{{url_for('user.userbookinginfo')}}">
+                                          <div class="modal-header">
+                                            <h5 class="modal-title" id="addroom">Payment Details</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                              <span aria-hidden="true">&times;</span>
+                                            </button>
+                                          </div>
+                                          
+                                          <div class="modal-body">
+                                            
+                                              <div class="form-group row">
+                                                <label for="totalbed" class="col-md-6 col-form-label">Pg Name</label>
+                                                <div class="col-md-6">
+                                                  <input type="text" class="form-control" value="{{x['pg_name']}}" readonly>
+                                                  <input type="text" class="form-control" name="pgid" value="{{x['pgid']}}" hidden>
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="availbed" class="col-md-6 col-form-label">Type</label>
+                                                <div class="col-md-6">
+                                                  <input type="text"  class="form-control" value="{{x['pg_gender'] }} Pg" readonly>
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group row">
+                                                <label for="rentM1" class="col-md-6 col-form-label">Owner name </label>
+                                                <div class="col-md-6">
+                                                  <input type="text" name="room_rent" class="form-control" value="{{x['fname']}} {{x['lname']}}" readonly >
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group row">
+                                                <label for="rentM1" class="col-md-6 col-form-label">Area</label>
+                                                <div class="col-md-6">
+                                                  <input type="text" name="room_rent" class="form-control" value="{{x['area']}}" readonly>
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group row">
+                                                <label for="rentM1" class="col-md-6 col-form-label">City</label>
+                                                <div class="col-md-6">
+                                                  <input type="text" name="room_rent" class="form-control" value="{{x['city']}}" readonly>
+                                                </div>
+                                              </div>
+
+                                              <div class="form-group row">
+                                                <label for="rentM1" class="col-md-6 col-form-label">Room Rent</label>
+                                                <div class="col-md-6">
+                                                  <input type="text" class="form-control" value="{{x['rent']}}" readonly>
+                                                  <input type="text" class="form-control" name="bid" value="{{x['bid']}}" hidden>
+                                                  
+                                                </div>
+                                              </div>
+                                              <div class="form-group row">
+                                                <label for="rentM1" class="col-md-6 col-form-label">Tokan Amount</label>
+                                                <div class="col-md-6">
+                                                  <input type="text" name="room_rent" class="form-control" value="{{x['amount']}}" readonly>
+                                                </div>
+                                              </div>
+                                               
+                          
+
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success" name="payment">Proceed to Pay</button>
+                                            <button type="button" data-dismiss="modal" class="btn btn-danger" >Close</button>
+                                      
+                                          </div>
+                                          {% endfor %}
+                                        </form>
+                                        </div>
+                                      </div>
+                                    </div>      
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+
+              {% if value == "3" %}
+             <div class="row">
+                    <div class="col-12">
+                     
+                        <div class="card">
+                            <div class="card-body">
+                              <form>
+              
+                <table class="table table-hover">
+                   <thead>
+       {%for x in data %}
+    <tr style="font-weight:bold; background-color: #E8E8E8;">
+      <td scope="col" colspan=6 style="color:black; margin-left: 15px; font-size: 22px;">{{ x['pg_name']}} </td>
+      <td style="color:black; font-size: 22px;">{{ x['pg_gender']}} Pg
+      </td>
+      
+    </tr>
+  </thead>
+  <thead>
+    <tr style="font-weight:bold; background-color: #181818;">
+      <td scope="col" style="color:white;">Owner name</td>
+      <td scope="col"style="color:white;">Phone no</td>
+      <td scope="col"style="color:white;">Date</td>
+      <td scope="col"style="color:white;">Area</td>
+      <td scope="col"style="color:white;">City</td>
+      <td scope="col"style="color:white;">Amount</td>
+      <td scope="col"style="color:white;">Status</td>
+
+    </tr>
+  </thead>
+  
+  <tbody>
+    
+    <tr>
+      <td scope="row" style="color:black;">{{ x['fname']}} {{x['lname']}}</td>
+    
+    <td scope="row" style="color:black;">{{ x['phone']}}</td>
+    
+      <td scope="row" style="color:black;">{{ x['book_date']}}</td>
+    
+      <td scope="row" style="color:black;">{{ x['area']}}</td>
+   
+      <td scope="row" style="color:black;">{{ x['city']}}</td>
+
+       <td scope="row" style="color:black;">{{ x['amount']}}</td>
+    
+
+    <td scope="row"><button type="button" class="btn btn-danger" style="color:white; font-weight: bold;"> Declined</button></td>
+      
+    </tr>
+    
+  </tbody>
+  {% endfor %}
+  
+</table>  
+</form>       
+
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+{% endblock %}
