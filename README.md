@@ -1,4 +1,4 @@
-# MIT Trisemester-2 Mini-Project
+# PgRecommendation System
 **Bonjour**,
 This Markdown file will help you learn,install and run the python application on flask web framework.
 
